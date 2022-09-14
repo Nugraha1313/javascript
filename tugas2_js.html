@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <title>Tugas 2 Javascript</title>
+    <style>
+        table {
+            text-align: center;
+            vertical-align: middle;
+            font-size: small;
+        }
+        table tbody {
+            font-weight: 600;
+        }
+        table tbody tr:hover {
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Diketahui ada 100 orang pegawai dengan nama Pegawai1 s/d Pegawai100:
+Gunakan If multikondisi untuk menentukan jabatan:
+- Pegawai1 s/d Pegawai25 jabatan manager, gapok 15jt
+- Pegawai26 s/d Pegawai50 jabatan asisten manager, gapok 10jt
+- Pegawai51 s/d Pegawai75 jabatan supervisor, gapok 7jt
+- Pegawai76 s/d Pegawai100 jabatan staff, gapok 4jt
+Untuk Gapok gunakan switch case
+
+Dari Gapok Tentukan:
+- Tunjangan Jabatan = 20 % dari gapok
+- Tunjangan Kesehatan = 10 % dari gapok
+- Gaji Kotor = Gapok + Tunjab + Tunkes
+
+Gunakan ternary untuk menentukan agama Muslim dan Non Muslim
+baris ganjil Muslim , warna barisnya yellow
+baris genap Non Muslim , warna barisnya biru
+jika pegawai muslim dan gaji kotornya minimal 7jt, ada zakat profesi sebesar 2,5% dari gaji kotornya
+
+Take Home Pay = Gaji Kotor - Zakat Profesi
+
+
+Tugas:
+Cetak Data Pegawai dan data terkait berbentuk tabel: -->
+    <h3 style="text-align: center">DATA PEGAWAI</h3>
+    <table class="table table-bordered table-hover" style="width: 90%; margin: auto;">
+      <thead class="thead-dark">
+        <th>NO</th>
+        <th>NAMA</th>
+        <th>JABATAN</th>
+        <th>AGAMA</th>
+        <th>GAJI POKOK</th>
+        <th>TUNJANGAN JABATAN</th>
+        <th>TUNJANGAN KESEHATAN</th>
+        <th>GAJI KOTOR</th>
+        <th>ZAKAT PROFESI</th>
+        <th>TAKE HOMEPAY</th>
+      </thead>
+      <tbody>
+        <script>
+          let agama,
+            color,
+            jabatan,
+            gajiPokok,
+            tunjanganJabatan,
+            tunjanganKesehatan,
+            gajiKotor,
+            zakatProfesi,
+            takeHomePay;
+          for (i = 1; i <= 100; i++) {
+            agama = i % 2 == 0 ? "Non Muslim" : "Muslim";
+            color = i % 2 == 0 ? "table-primary" : "table-warning";
+            if (i >= 1 && i <= 25) jabatan = "Manajer";
+            else if (i >= 26 && i <= 50) jabatan = "Asisten Manajer";
+            else if (i >= 51 && i <= 75) jabatan = "Supervisor";
+            else if (i >= 76 && i <= 100) jabatan = "Staff";
+            switch (jabatan) {
+              case "Manajer":
+                gajiPokok = 15000000;
+                break;
+              case "Asisten Manajer":
+                gajiPokok = 10000000;
+                break;
+              case "Supervisor":
+                gajiPokok = 7000000;
+                break;
+              case "Staff":
+                gajiPokok = 4000000;
+                break;
+            }
+            tunjanganJabatan = (20 / 100) * gajiPokok;
+            tunjanganKesehatan = (10 / 100) * gajiPokok;
+            gajiKotor = gajiPokok + tunjanganJabatan + tunjanganKesehatan;
+            zakatProfesi = (agama === "Muslim" && gajiKotor >= 7000000) ? (2.5 / 100) * gajiKotor : 0;
+            takeHomePay = gajiKotor - zakatProfesi;
+            document.write(`<tr class="${color}">
+                                <td>${i}</td>
+                                <td>Pegawai${i}</td>
+                                <td>${jabatan}</td>
+                                <td>${agama}</td>
+                                <td>Rp ${gajiPokok}</td>
+                                <td>Rp ${tunjanganJabatan}</td>
+                                <td>Rp ${tunjanganKesehatan}</td>
+                                <td>Rp ${gajiKotor}</td>
+                                <td>Rp ${zakatProfesi}</td>
+                                <td>Rp ${takeHomePay}</td>
+                            </tr>`);
+            // document.write(`<tr bgcolor="${color}">
+            //                     <td>${i}</td>
+            //                     <td>Pegawai${i}</td>
+            //                     <td>${jabatan}</td>
+            //                     <td>${agama}</td>
+            //                     <td>Rp ${gajiPokok}</td>
+            //                     <td>Rp ${tunjanganJabatan}</td>
+            //                     <td>Rp ${tunjanganKesehatan}</td>
+            //                     <td>Rp ${gajiKotor}</td>
+            //                     <td>Rp ${zakatProfesi}</td>
+            //                     <td>Rp ${takeHomePay}</td>
+            //                 </tr>`);
+          }
+        </script>
+      </tbody>
+    </table>
+    <br>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
