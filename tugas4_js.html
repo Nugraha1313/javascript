@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Tugas 4 Javascript</title>
+</head>
+<body class="bg-light">
+    <div class="bg-dark row d-flex justify-content-center mx-5 text-white">
+        <h4 style=" margin-bottom: 1em; margin-top: 1em;">Pembelian Barang dengan Konversi Kurs</h4>
+    </div>
+    <form action="" id="frm" style="margin-top: 1em;">
+        <div class="form-group row mx-5">
+            <label for="NamaPembeli" class="col-sm-2 col-form-label">Nama Pembeli</label>
+            <div class="col-sm-4">
+                <input type="text" name="namaPembeli" id="NamaPembeli" value="" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row mx-5">
+            <label for="NamaBarang" class="col-sm-2 col-form-label">Nama Barang</label>
+            <div class="col-sm-4">
+                <input type="text" name="namaBarang" id="NamaBarang" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row mx-5">
+            <label for="HargaBarang" class="col-sm-2 col-form-label">Harga Barang</label>
+            <div class="col-sm-4">
+                <input type="number" name="hargaBarang" id="HargaBarang" value="" class="form-control" min="0">
+            </div>
+        </div>
+        <div class="form-group row mx-5">
+            <label for="JumlahBarang" class="col-sm-2 col-form-label">Jumlah Barang</label>
+            <div class="col-sm-4">
+                <input type="number" name="jumlahBarang" id="JumlahBarang" value="" class="form-control" min="0">
+            </div>
+        </div>
+        <div class="form-group row mx-5">
+            <label for="ValutaAsing" class="col-sm-2 col-form-label">Valuta Asing</label>
+            <div class="col-sm-4">
+                <select class="custom-select" name="valas" id="" onchange="konversiKurs()">
+                    <option value="">-- Pilih Valas --</option>
+                    <option value="14917">-- USD --</option>
+                    <option value="10590">-- SGD --</option>
+                    <option value="14918">-- EUR --</option>
+                </select>
+            </div>
+        </div>  
+    </form>
+    <div id="paragraf" class="row mx-5">
+        <div class="col-sm-4">
+            <p class="text-white" id="isi" style="margin-top: 1em; font-size:large;"></p>
+        </div>
+    </div>
+    <script>
+        function konversiKurs() {
+            // nama pembeli
+            let namaPembeliInput = document.getElementById('frm').namaPembeli.value
+            let namaPembeliNoInput = "-"
+            let resultNamaPembeli = (namaPembeliInput !== '') ? namaPembeliInput : namaPembeliNoInput
+            // nama barang
+            let namaBarangInput = document.getElementById('frm').namaBarang.value
+            let namaBarangNoInput = "-"
+            let resultNamaBarang = (namaBarangInput !== '') ? namaBarangInput : namaBarangNoInput
+            //  harga barang
+            let hargaBarangInput = document.getElementById('frm').hargaBarang.value
+            let hargaBarangNoInput = "0"
+            let resultHargaBarang = (hargaBarangInput !== '') ? hargaBarangInput : hargaBarangNoInput
+            //  jumlah barang
+            let jumlahBarangInput = document.getElementById('frm').jumlahBarang.value
+            let jumlahBarangNoInput = "0"
+            let resultJumlahBarang = (jumlahBarangInput !== '') ? jumlahBarangInput : jumlahBarangNoInput
+            // valuta asing
+            let valutaAsingInput = document.getElementById('frm').valas.value
+            let resultValutaAsing = (valutaAsingInput !== '') ? valutaAsingInput : 0
+            // total bayar
+            let totalBayar = hargaBarangInput * jumlahBarangInput * resultValutaAsing
+
+            // output
+            let output = `<strong>Data Pembelian</strong> <br>
+            Nama Pembeli : ${resultNamaPembeli} <br>
+            Nama Barang : ${resultNamaBarang} <br>
+            Harga Barang : ${resultHargaBarang} <br>
+            Jumlah Barang : ${resultJumlahBarang} <br>
+            Valuta Asing : ${resultValutaAsing} <br>
+            Total Bayar : ${totalBayar}`;
+            document.getElementById('isi').innerHTML = output
+            document.getElementById("paragraf").classList.add("bg-dark");
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
